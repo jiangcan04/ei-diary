@@ -1318,6 +1318,10 @@ test("the app starts offline and waits until editing ends to offer a worker upda
   const context = await webkit.launchPersistentContext("", {
     ...devices["iPhone 13"], timezoneId: "Asia/Shanghai", reducedMotion: "reduce",
   });
+  context.on("close", () => t.diagnostic("Offline test: persistent context closed"));
+  context.on("page", (opened) => {
+    opened.on("crash", () => t.diagnostic("Offline test: page crashed"));
+  });
   t.after(() => context.close());
   const origin = "http://127.0.0.1:" + server.httpServer.address().port;
   let page = context.pages()[0] ?? await context.newPage();
@@ -1329,10 +1333,11 @@ test("the app starts offline and waits until editing ends to offer a worker upda
   const click = (name) => calendarOrButton(page, name).click();
   await launch();
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
-  await page.close();
-
-  networkAvailable = false;
+  // Keep one page alive: closing the last persistent WebKit page can close its context.
+  const onlinePage = page;
   page = await context.newPage();
+  await onlinePage.close();
+  networkAvailable = false;
   await launch();
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
   const offlineFontReady = await page.evaluate(async () => {
@@ -1351,9 +1356,9 @@ test("the app starts offline and waits until editing ends to offer a worker upda
   await page.getByText("摆放模式 · 已贴 1 张照片", { exact: true }).waitFor();
   await click("返回");
   await page.getByRole("heading", { name: "2026年11月", exact: true }).waitFor();
-  await page.close();
-
+  const savedPage = page;
   page = await context.newPage();
+  await savedPage.close();
   await launch();
   await click("打开日记本");
   await click("打开 2026-11-18 最新一页，共 1 页");

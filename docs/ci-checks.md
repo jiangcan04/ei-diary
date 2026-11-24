@@ -19,3 +19,9 @@
 需要GitHub禁止失败检查合并时，在仓库建立且检查实际运行后单独配置分支保护；本工作流本身不自动设置保护。无仓库时不预填成功结果。
 
 依据：[setup-node](https://github.com/actions/setup-node)、[checkout](https://github.com/actions/checkout)、[Playwright CI](https://playwright.dev/docs/ci)。
+
+## 第58步Linux WebKit复验修正
+
+截图中的取消运行由同分支新任务触发concurrency规则，不代表断言失败。另一运行离线用例在关闭唯一页面后newPage报上下文关闭；改为先建替代页再关闭原页，避免零页面窗口。保留断网、照片重开、编辑期间不更新及更新后内容断言；加入上下文关闭/页面崩溃诊断。不能仅凭截图确定浏览器进程退出的底层原因。
+
+actions/checkout与setup-node升级到官方v6，其内部运行时为Node24；项目仍按.nvmrc使用26.10.0。YAML解析通过，本地独立离线测试通过，重新构建后完整七项WebKit通过。Linux GitHub远端复验待上传，不将Mac通过等同Linux通过。
