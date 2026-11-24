@@ -596,3 +596,19 @@ Vite 负责构建，TypeScript 独立检查类型。Vitest 检查源码逻辑，
 - docs/independent-deployment-check.md：保存实际Pages构建设置、网址、用户验证、Workers排查及未覆盖边界。
 
 网站部署提供程序文件；IndexedDB日记仍按来源隔离，新旧网址通过备份恢复迁移，不随Git推送或部署自动同步。第60步未开始。
+
+
+## 第60步最终验收与发布（2026-11-24）
+
+用户确认本地全部测试通过，推送后同一Pages网址的更新、旧混合页继续编辑、离线字体与保存、备份恢复及重复恢复检查通过。控制台确认Pages生产部署8bfc0cf8对应源码158da0a0574b79535016f0e2bdecfdae550da0f8。已通过GitHub页面发布[ei ？ v0.1.0](https://github.com/jiangcan04/ei-diary/releases/tag/v0.1.0)，标签指向该精确提交，上传ei-0.1.0-static.zip及SHA256SUMS.txt；页面显示Latest及四项附件（含自动源码包）。ZIP SHA256：bff187b76ce5e290273b38460643c4f75ae3a4dc8f841c7b47e04729f1d8fe33，与GitHub显示一致。附件含构建文件及许可，不含个人日记。
+
+本轮设备/系统未另行提供；Fork及iPad专项限制沿用。版本标签固定已测试源码，之后补充的验收文档作为后续文档提交，不移动既有发布标签。第60步完成，未开始第61步。
+
+文件职责：
+
+- docs/updating.md：说明Fork同步、自动部署、保存后接受更新、同来源更新验收、回退与本机数据边界。
+- CHANGELOG.md：面向使用者记录版本功能、发布日期、发布提交、兼容身份及已知限制。
+- package.json和package-lock.json：统一工程版本0.1.0；不改变数据库结构或备份格式。
+- index.html：application-version元信息标识当前HTML版本，HTML变化进入既有预缓存修订；不增加页面按钮或改变Manifest身份。
+- README.md：提供已验收Pages体验、部署、更新和正式Release入口。
+- 发布附件：静态文件由已验收提交的dist打包，许可证随包分发，校验和对应上传字节；GitHub Release与Pages自动部署相互独立。

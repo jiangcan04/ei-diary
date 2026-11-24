@@ -6,7 +6,7 @@
 
 **[立即体验](https://ei-diary-check.pages.dev/) · [自行部署](#自行部署) · [数据与备份](docs/data-and-backup.md) · [本地开发](#本地开发)**
 
-当前准备版本为 **v0.1.0**，正式发布及本轮更新验收尚未完成。体验站可能晚于仓库代码更新。[更新与回退](docs/updating.md) · [版本记录](CHANGELOG.md)。GitHub仓库：[jiangcan04/ei-diary](https://github.com/jiangcan04/ei-diary)。
+首个公开版本 **[v0.1.0](https://github.com/jiangcan04/ei-diary/releases/tag/v0.1.0)** 已发布，本轮同网址更新由用户确认验收通过。体验站可能晚于仓库代码更新。[更新与回退](docs/updating.md) · [版本记录](CHANGELOG.md)。GitHub仓库：[jiangcan04/ei-diary](https://github.com/jiangcan04/ei-diary)。
 
 ## 看看本子
 
