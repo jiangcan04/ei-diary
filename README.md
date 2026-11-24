@@ -4,9 +4,9 @@
 
 面向iPhone的手写涂鸦日记PWA，无需登录。同一天可以记很多页，没记录的日子就留白。
 
-**[立即体验](https://ei-ni-kan.pages.dev/) · [自行部署](#自行部署) · [数据与备份](docs/data-and-backup.md) · [本地开发](#本地开发)**
+**[立即体验](https://ei-diary-check.pages.dev/) · [自行部署](#自行部署) · [数据与备份](docs/data-and-backup.md) · [本地开发](#本地开发)**
 
-体验站可能晚于仓库代码更新。GitHub仓库：[jiangcan04/ei-diary](https://github.com/jiangcan04/ei-diary)。
+当前准备版本为 **v0.1.0**，正式发布及本轮更新验收尚未完成。体验站可能晚于仓库代码更新。[更新与回退](docs/updating.md) · [版本记录](CHANGELOG.md)。GitHub仓库：[jiangcan04/ei-diary](https://github.com/jiangcan04/ei-diary)。
 
 ## 看看本子
 
@@ -38,7 +38,7 @@
 
 当前可用方式：本地构建后，将dist目录上传至HTTPS静态网站托管平台，部署在站点根路径。不要上传源码目录作为构建产物。
 
-[Cloudflare Pages的Git连接部署教程](docs/deploy-cloudflare.md)已编写，独立部署实测待后续完成，目前尚未提供一键部署按钮。可从GitHub仓库Fork；独立部署仍待第59步实测。部署到自己的网址不会自动提供服务器数据存储或跨设备同步。
+按[Cloudflare Pages的Git连接部署教程](docs/deploy-cloudflare.md)部署。目前已从作者仓库验证独立Pages站的主屏幕启动、离线保存及备份恢复；其他账号Fork流程尚未实测，目前未提供一键部署按钮。部署到自己的网址不会自动提供服务器数据存储或跨设备同步。
 
 换网址前先导出备份，在新网址恢复并验证内容后再停用旧网址。普通版本更新保持原网址。
 

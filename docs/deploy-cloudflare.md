@@ -1,6 +1,6 @@
 # 将自己的「ei ？」部署到Cloudflare Pages
 
-本教程适用于从GitHub源码建立一个新的Pages Git集成项目。当前公开GitHub仓库尚未创建，仓库链接将在第58步填写；独立部署实测安排在第59步。本次仅编写教程，没有替任何人创建或更新网站。
+本教程适用于从GitHub源码建立新的Pages Git集成项目。源码仓库：https://github.com/jiangcan04/ei-diary 。已按作者原仓库建立https://ei-diary-check.pages.dev/并由用户验收主屏幕、离线及备份恢复；不同账号Fork流程未实测。更新和回退见[更新指南](updating.md)。
 
 ## 开始前
 

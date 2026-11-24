@@ -584,3 +584,15 @@ Vite 负责构建，TypeScript 独立检查类型。Vitest 检查源码逻辑，
 ## 第58步最终验收
 
 用户确认第58步通过，实际公开仓库为jiangcan04/ei-diary，main提交f9f97f2已在GitHub运行成功，并从远端独立克隆通过类型、22单元、构建及七项WebKit。公开源码和部署应用分开；浏览器日记未上传。第59步独立来源需新Pages项目；严格Fork复验需不同拥有者，作者原仓库直接部署不冒充Fork证据。
+
+
+## 第59步独立Pages部署与真机验收
+
+2026-11-24用户确认https://ei-diary-check.pages.dev/在iPhone Safari显示封面和离线就绪，新增主屏幕图标可联网及断网使用，查看、编辑、保存与备份恢复/重复恢复检查通过。使用原GitHub仓库main直接连接Pages；没有验证不同账号Fork，未获得本轮设备/系统明细，iPad未测。原Workers站连接超时根因未确定，原Pages及Workers均保留。
+
+- src/app-updates.ts：生产环境注册Service Worker，显示离线准备、接管就绪及失败重试；编辑时隐藏状态，更新仍由用户在编辑结束后接受。就绪仅表示已激活Worker控制当前页面，不能保证另一安装环境或未来所有请求可用，也不能解决页面加载之前的域名超时。
+- src/style.css：离线状态与重试的固定底部样式，不参与画纸尺寸布局。
+- tests/startup.test.mjs：在既有离线更新回归外，增加注册请求失败后重试成功的生产WebKit检查；本轮此前本地八项通过，GitHub通过由用户反馈，真机验收单独记录。
+- docs/independent-deployment-check.md：保存实际Pages构建设置、网址、用户验证、Workers排查及未覆盖边界。
+
+网站部署提供程序文件；IndexedDB日记仍按来源隔离，新旧网址通过备份恢复迁移，不随Git推送或部署自动同步。第60步未开始。
