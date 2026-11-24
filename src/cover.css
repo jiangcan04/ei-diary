@@ -1,0 +1,111 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+main > .cover-screen {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  justify-self: stretch;
+}
+
+.cover-date {
+  position: absolute;
+  top: max(1.25rem, env(safe-area-inset-top));
+  left: max(1.25rem, env(safe-area-inset-left));
+  font-size: 0.875rem;
+  transform: rotate(-3deg);
+}
+
+.cover-book {
+  appearance: none;
+  position: relative;
+  display: block;
+  /* Short mobile viewports need a height-based cap to keep the cover small. */
+  width: min(42vw, 21.5svh, 15rem);
+  aspect-ratio: 5 / 7;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4% 6% 6% 4%;
+  background: repeating-linear-gradient(
+    to bottom, #faf8ef 0 3px, #d7d2c2 3px 4px
+  );
+  box-shadow: 3px 6px 0 #c4baa5, 5px 11px 18px #25232230;
+  perspective: 700px;
+  cursor: pointer;
+}
+
+.cover-book:focus-visible {
+  outline: 2px solid #252322;
+  outline-offset: 6px;
+}
+
+.cover-artwork {
+  position: absolute;
+  inset: 0 3% 3% 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #d2deca;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  box-shadow: 1px 2px 3px #25232230;
+}
+
+.cover-artwork > span {
+  position: absolute;
+}
+
+.cover-cloud {
+  inset: 10% 9% auto -3%;
+  height: 30%;
+  background: #f7f6f0;
+  clip-path: polygon(0 36%, 16% 32%, 30% 9%, 46% 2%, 63% 29%, 84% 47%, 100% 79%, 70% 91%, 39% 84%, 0 100%);
+}
+
+.cover-cloud-small {
+  inset: 36% -4% auto 55%;
+  height: 17%;
+  background: #f7f6f0;
+  clip-path: polygon(0 67%, 22% 50%, 44% 16%, 59% 24%, 81% 0, 100% 12%, 100% 100%, 31% 89%);
+}
+
+.cover-hill {
+  inset: 48% 0 0;
+  background: #5b7350;
+  clip-path: polygon(0 42%, 19% 33%, 37% 22%, 62% 1%, 74% 7%, 89% 21%, 100% 32%, 100% 100%, 0 100%);
+}
+
+.cover-meadow {
+  inset: 64% 0 0;
+  background: #8da581;
+  clip-path: polygon(0 20%, 24% 6%, 40% 10%, 58% 30%, 77% 36%, 100% 31%, 100% 100%, 0 100%);
+}
+
+.cover-land {
+  inset: 81% 0 0;
+  background: #252322;
+  clip-path: polygon(0 38%, 17% 49%, 41% 36%, 66% 12%, 86% 4%, 100% 17%, 100% 100%, 0 100%);
+}
+
+.cover-artwork::after {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(115deg, #25232210 0 1px, transparent 1px 4px);
+  opacity: 0.55;
+  content: "";
+}
+
+.cover-spine {
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: 8%;
+  background: #353431;
+  box-shadow: 2px 0 6px #25232245;
+}

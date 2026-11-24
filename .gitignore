@@ -1,0 +1,32 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+
+# System and local editor files
+.DS_Store
+._*
+.idea/
+.vscode/
+*.log
+
+# Local credentials; retain safe example configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+*.pem
+*.key
+
+# Personal diary exports: keep generated test fixtures in source
+/backups/
+/personal-data/
+/local-data/
+*备份*.zip
+/ei-ni-kan-backup*.zip
+/ei-backup*.zip

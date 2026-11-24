@@ -1,0 +1,148 @@
+.ink-canvas,
+.reading-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #f7f6f0;
+  background-image: var(--paper-grain);
+  box-shadow: 0 2px 6px #25232226;
+}
+
+.ink-canvas {
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.reading-page-tabs:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  max-width: min(calc(100vw - 2rem), 26rem);
+}
+
+.reading-page-tabs button {
+  min-width: 44px;
+  padding-inline: 0.5rem;
+  border: 1px solid #8da581;
+  border-radius: 2px 4px 3px 2px;
+  color: inherit;
+  background: #f7f6f0;
+}
+
+.reading-page-tabs [aria-pressed="true"] {
+  background: #c5d2be;
+}
+
+.ink-canvas--eraser {
+  cursor: cell;
+}
+
+.ink-canvas--placing {
+  cursor: default;
+  outline: 1px dashed #8da581;
+  outline-offset: 4px;
+}
+
+.photo-status,
+.save-status {
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.photo-status:empty,
+.save-status:empty {
+  display: none;
+}
+
+.photo-actions:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.photo-actions button {
+  padding-inline: 0.55rem;
+  font-size: 0.875rem;
+}
+
+.photo-workspace {
+  position: relative;
+}
+
+.photo-workspace .photo-actions:not([hidden]) {
+  position: absolute;
+  z-index: 3;
+  bottom: calc(100% + 0.25rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  padding: 0.25rem;
+  border: 1px solid #8da581;
+  border-radius: 3px;
+  background: #f7f6f0;
+  box-shadow: 0 2px 5px #25232226;
+}
+
+/* The viewport fills the screen while the paper keeps its original 3:4 ratio. */
+.paper-viewport {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--paper-workspace-height, 65dvh);
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: transparent;
+}
+
+.photo-workspace {
+  width: 100%;
+}
+
+.paper-viewport--editing > .ink-canvas,
+.paper-viewport--reading > .page-turn {
+  width: min(100%, calc((var(--paper-workspace-height, 65dvh) - 16px) * 0.75));
+  min-width: 0;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 2px 6px #25232226;
+}
+
+.paper-viewport--reading,
+.paper-viewport--editing,
+.reading-canvas {
+  touch-action: none;
+}
+
+.diary-page-screen .reading-page-tabs:not([hidden]) {
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+.diary-page-screen .reading-page-tabs button {
+  flex-shrink: 0;
+}
+
+main > .diary-page-screen {
+  align-self: start;
+  justify-self: center;
+  gap: 0.3rem;
+}
+
+.photo-workspace > .photo-status {
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  padding: 0.2rem;
+  background: #f7f6f0e8;
+  pointer-events: none;
+}

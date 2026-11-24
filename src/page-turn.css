@@ -1,0 +1,132 @@
+.page-turn {
+  position: relative;
+  isolation: isolate;
+  width: min(calc(100vw - 2rem), 36svh, 26rem);
+  box-shadow: 0 2px 6px #25232226;
+}
+
+.page-turn > canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: none;
+}
+
+.page-turn-under {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  background-color: #f7f6f0;
+  background-image: var(--paper-grain);
+}
+
+.page-turn > .reading-canvas {
+  position: relative;
+}
+
+.page-turn[data-turn-direction] .page-turn-under {
+  visibility: visible;
+}
+
+.page-turn[data-turn-direction="older"] > .reading-canvas {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, var(--turn-spread) 100%, 0 calc(100% - var(--turn-spread)));
+}
+
+.page-turn[data-turn-direction="newer"] > .reading-canvas {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--turn-spread)), calc(100% - var(--turn-spread)) 100%, 0 100%);
+}
+
+.page-turn[data-turn-direction]::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(35deg, #716953 0%, #d4cbb8 25%, #fcfaf1 57%);
+  content: "";
+  pointer-events: none;
+}
+
+.page-turn[data-turn-direction="older"]::after {
+  clip-path: polygon(0 calc(100% - var(--turn-spread)),
+    calc(var(--turn-spread) * 0.57) calc(100% - var(--turn-spread) * 0.57),
+    var(--turn-spread) 100%);
+}
+
+.page-turn[data-turn-direction="newer"]::after {
+  clip-path: polygon(100% calc(100% - var(--turn-spread)),
+    calc(100% - var(--turn-spread) * 0.57) calc(100% - var(--turn-spread) * 0.57),
+    calc(100% - var(--turn-spread)) 100%);
+  background: linear-gradient(-35deg, #716953 0%, #d4cbb8 25%, #fcfaf1 57%);
+}
+
+.page-turn--settling > .reading-canvas,
+.page-turn--settling::after {
+  transition: clip-path 220ms ease-out, opacity 220ms ease-out, transform 220ms ease-out;
+}
+
+.page-turn--committed > .reading-canvas,
+.page-turn--committed::after {
+  opacity: 0;
+}
+
+.page-turn--committed[data-turn-direction="older"] > .reading-canvas {
+  transform: translate(6%, -3%) rotate(4deg);
+}
+
+.page-turn--committed[data-turn-direction="newer"] > .reading-canvas {
+  transform: translate(-6%, -3%) rotate(-4deg);
+}
+
+.page-turn-corner {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  touch-action: none;
+  cursor: grab;
+}
+
+.page-turn-corner--older { left: 0; }
+.page-turn-corner--newer { right: 0; }
+
+.page-turn-corner::before {
+  position: absolute;
+  bottom: 0;
+  width: 23px;
+  height: 17px;
+  background: linear-gradient(135deg, #8da581, #dfe7da);
+  content: "";
+}
+
+.page-turn-corner--older::before {
+  left: 0;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.page-turn-corner--newer::before {
+  right: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.page-turn-corner:disabled {
+  cursor: default;
+}
+
+.page-turn-corner:disabled::before,
+.page-turn[data-turn-direction] .page-turn-corner::before {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-turn--settling > .reading-canvas,
+  .page-turn--settling::after {
+    transition: none;
+  }
+}
+
+.page-turn-corner:disabled {
+  pointer-events: none;
+}
