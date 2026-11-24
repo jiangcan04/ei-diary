@@ -7,7 +7,8 @@ export function createPageTurn(
   onPreview: (direction: Direction | undefined) => void,
   onTurn: (direction: Direction) => void,
 ) {
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  // Query at interaction time: WebKit may update retained MediaQueryList objects later.
+  const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let drag: { id: number; direction: Direction; x: number; y: number; moved: boolean } | undefined;
   let settling: number | undefined;
   let suppressClick = false;
@@ -29,7 +30,7 @@ export function createPageTurn(
   }
 
   function finish(direction: Direction, commit: boolean): void {
-    if (reducedMotion.matches) {
+    if (prefersReducedMotion()) {
       reset();
       if (commit) onTurn(direction);
       return;
@@ -67,7 +68,7 @@ export function createPageTurn(
     button.addEventListener("pointermove", (event) => {
       if (!drag || event.pointerId !== drag.id) return;
       drag.moved ||= Math.hypot(event.clientX - drag.x, event.clientY - drag.y) > 6;
-      if (drag.moved && !reducedMotion.matches) reveal(direction, Math.min(0.92, progress(event, drag)));
+      if (drag.moved && !prefersReducedMotion()) reveal(direction, Math.min(0.92, progress(event, drag)));
     });
     button.addEventListener("pointerup", (event) => {
       if (!drag || event.pointerId !== drag.id) return;

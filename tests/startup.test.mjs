@@ -1579,6 +1579,7 @@ test("reading follows the diary order across dates and disables the ends", { tim
   await seePage("2026-11-16", 3);
   await newer.click();
   await seePage("2026-11-18", 1);
+  await folded.waitFor({ state: "hidden" });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.waitForFunction(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => resolve())));
