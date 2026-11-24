@@ -100,3 +100,9 @@
 - 第57步用户确认通过。docs/deploy-cloudflare.md已完成Pages Git接入、构建配置、原Direct Upload边界、数据迁移及验收说明；README连接教程。第58步已准备首次公开候选清单并补齐工作流YAML解析；GitHub CLI凭据失效，待用户登录及确认仓库与公开提交身份，尚未提交/推送，未开始第59步。
 
 - 第58步继续：已找到GitHub Desktop克隆目录Documents/GitHub/ei-diary，远端为jiangcan04/ei-diary，main保留原Initial commit。将经忽略规则筛选的项目文件复制到该目录，保留.git；未提交/推送，未部署，远端检查与克隆构建仍待验证。日常开发目录暂保持原位置。
+
+- 2026-11-24：用户截图确认GitHub Project checks #3在main提交f9f97f2通过（约1分32秒）。代码已上传jiangcan04/ei-diary；Linux远端正常检查已验证，之前截图同时证明失败会标红。第58步尚需重新克隆构建核验，未开始第59步，网站未部署更新。
+
+- 第58步独立克隆验证：2026-11-24从GitHub公开远端克隆main提交f9f97f2至全新临时目录；Node 26.10.0，npm ci成功且当次审计0漏洞，类型检查通过，8文件22单元测试通过，生产构建成功且预缓存10文件，七项WebKit回归全通过。结合用户截图远端检查通过，第58步实施及验证完成，等待用户最终验收；未开始第59步或部署。安装脚本审批提示仍存在，但本次构建成功。
+
+- 第58步用户确认通过：GitHub远端检查及独立克隆构建/七项回归已完成。第59步准备docs/independent-deployment-check.md配置与验收表；待选择其他账号/组织Fork或原仓库独立部署（后者不能计作Fork已验证），尚未创建Cloudflare项目，未开始第60步。

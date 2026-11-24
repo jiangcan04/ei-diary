@@ -569,3 +569,18 @@ Vite 负责构建，TypeScript 独立检查类型。Vitest 检查源码逻辑，
 ## 第57步验收后的部署教程
 
 用户确认第57步通过。docs/deploy-cloudflare.md规定站点根部署、npm run build与dist输出、固定Node版本、Git授权和备份迁移；README提供教程入口。教程不创建云端数据库，不承诺跨设备同步。现有Direct Upload来源保持，Git集成独立项目的真实验证待第59步。第58步补充YAML语法解析及基本配置检查通过，远端运行仍待验证。
+
+
+## 第58步远端检查结果（独立克隆验收待完成）
+
+用户截图确认main提交f9f97f2的Project checks #3成功。工作流已使用checkout/setup-node v6，项目Node版本仍由.nvmrc决定。tests/startup.test.mjs离线重开先创建替代页再关闭原页，避免持久化WebKit零页面生命周期风险；page-turn.ts在交互时读取减少动态效果偏好。docs/ci-checks.md记录故障与验证边界。GitHub Desktop使用Documents/GitHub/ei-diary克隆，原开发目录仍保留，后续改动需明确同步，避免测试和上传不同版本。远端重新克隆构建尚待完成，不推断第59步部署已执行。
+
+
+## 第58步独立克隆验证结果
+
+从公开远端重新克隆f9f97f2，在独立目录使用npm ci安装，未复制原node_modules或dist。类型、22单元、构建与七项WebKit全部通过，预缓存10资源；系统Playwright浏览器安装沿用本机工具缓存，不将其描述为全新操作系统验收。结合GitHub Linux远端成功结果，已验证代码可独立取得与构建，等待用户最终验收。仍未部署网站或实施第59步。
+
+
+## 第58步最终验收
+
+用户确认第58步通过，实际公开仓库为jiangcan04/ei-diary，main提交f9f97f2已在GitHub运行成功，并从远端独立克隆通过类型、22单元、构建及七项WebKit。公开源码和部署应用分开；浏览器日记未上传。第59步独立来源需新Pages项目；严格Fork复验需不同拥有者，作者原仓库直接部署不冒充Fork证据。

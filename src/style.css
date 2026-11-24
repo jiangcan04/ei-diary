@@ -200,3 +200,22 @@ input, select, textarea {
 .editor-save-error .save-status {
   margin-bottom: 0.25rem;
 }
+
+.app-offline-status {
+  position: fixed;
+  bottom: max(0.35rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  margin: 0;
+  padding: 0.2rem 0.5rem;
+  max-width: 90vw;
+  font-size: 0.75rem;
+  color: #252322;
+  background: #f7f6f0;
+  border-radius: 0.3rem;
+}
+.app-offline-status button {
+  margin-left: 0.3rem;
+  min-height: 44px;
+}

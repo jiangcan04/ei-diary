@@ -1333,6 +1333,7 @@ test("the app starts offline and waits until editing ends to offer a worker upda
   const click = (name) => calendarOrButton(page, name).click();
   await launch();
   await page.waitForFunction(() => !!navigator.serviceWorker.controller);
+  await page.getByText("离线已就绪", { exact: true }).waitFor();
   // Keep one page alive: closing the last persistent WebKit page can close its context.
   const onlinePage = page;
   page = await context.newPage();
@@ -1936,4 +1937,21 @@ test("failed manual and return saves retain the paper and share retry without mo
   }));
   assert.equal(saved.length, 1);
   assert.equal(saved[0].strokes.length, 2);
+});
+
+test("offline preparation reports registration failure and can retry", { timeout: 60_000 }, async (t) => {
+  const server = await preview({ preview: { host: "127.0.0.1", port: 0 } });
+  t.after(() => new Promise((resolve) => server.httpServer.close(resolve)));
+  const context = await webkit.launchPersistentContext("", { ...devices["iPhone 13"] });
+  t.after(() => context.close());
+  let blocked = true;
+  await context.route("**/sw.js", (route) => blocked ? route.abort() : route.continue());
+  const page = context.pages()[0] ?? await context.newPage();
+  await page.goto("http://127.0.0.1:" + server.httpServer.address().port);
+  await page.getByText("离线准备失败，请联网重试", { exact: true }).waitFor();
+  assert.equal(await page.evaluate(() => !!navigator.serviceWorker.controller), false);
+  blocked = false;
+  await page.getByRole("button", { name: "重试离线准备", exact: true }).click();
+  await page.getByText("离线已就绪", { exact: true }).waitFor();
+  assert.equal(await page.evaluate(() => !!navigator.serviceWorker.controller), true);
 });
